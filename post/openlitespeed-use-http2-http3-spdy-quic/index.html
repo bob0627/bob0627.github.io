@@ -1,0 +1,254 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OpenLiteSpeed开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持 | alect</title>
+<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582798995664">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://git.69cdn.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="OpenLiteSpeed开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持 | alect - Atom Feed" href="https://git.69cdn.com/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="开源版的OpenLiteSpeed（OLS）与商业版一样，现在已经完全支持现有的HTTP/ HTTP/2 / HTTP/3 / SPDY / QUIC协议，这些新协议给大家带来的好处就是打开网页速度越来越快，许多网页都能秒开。
+使用单独安装..." />
+    <meta name="keywords" content="HTTP/2,HTTP/3,SPDY,QUIC,DirectAdmin,OpenLiteSpeed" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://git.69cdn.com">
+  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582798995664" alt="">
+  </a>
+  <h1 class="site-title">
+    alect
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              OpenLiteSpeed开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-02-27
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://git.69cdn.com/tag/vDPVkko2I/" class="post-tag">
+                  # HTTP/2
+                </a>
+              
+                <a href="https://git.69cdn.com/tag/rm9ucyGAc7/" class="post-tag">
+                  # HTTP/3
+                </a>
+              
+                <a href="https://git.69cdn.com/tag/KYzoWjvF8i/" class="post-tag">
+                  # SPDY
+                </a>
+              
+                <a href="https://git.69cdn.com/tag/A_5QYVIJh7/" class="post-tag">
+                  # QUIC
+                </a>
+              
+                <a href="https://git.69cdn.com/tag/7xx8kWY3v/" class="post-tag">
+                  # DirectAdmin
+                </a>
+              
+                <a href="https://git.69cdn.com/tag/qlKzDKtWtC/" class="post-tag">
+                  # OpenLiteSpeed
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="/post-images/openlitespeed-use-http2-http3-spdy-quic.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>开源版的OpenLiteSpeed（OLS）与商业版一样，现在已经完全支持现有的HTTP/ <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">HTTP/2</a> / <a href="https://www.litespeedtech.com/http3-solutions">HTTP/3</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">SPDY</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/quic-support">QUIC</a>协议，这些新协议给大家带来的好处就是打开网页速度越来越快，许多网页都能秒开。</p>
+<p>使用单独安装的OpenLiteSpeed的时候，我们可以通过OLS的web admin管理页面通过选项方便开启这些协议的支持，后台选择Listeners，选择相应IP的SSL选项，按照页面提示开启即可。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582795243413.png" alt="" loading="lazy"></figure>
+<p>DirectAdmin版本的OLS默认安装好后只开启了HTTP/2协议的支持， <a href="https://www.litespeedtech.com/http3-solutions">HTTP/3</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">SPDY</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/quic-support">QUIC</a>这几个速度更快，技术更新的协议，因为DirectAdmin的原因无法直接在OLS的webadmin页面开启，需要手动修改OLS的配置文件进行修改。</p>
+<figure data-type="image" tabindex="2"><img src="https://git.69cdn.com/post-images/1582796984965.png" alt="" loading="lazy"></figure>
+<p>打开<code>usr/local/lsws/conf/listeners.conf</code>文件，会看到有以你服务器IP地址命名的配置选项，找到443结尾的地方，增加如下内容然后重启lsws服务即可。<code>/usr/local/lsws/bin/lswsctrl restart</code>。</p>
+<pre><code class="language-bash"> renegProtection         1
+ sslSessionCache         1
+ sslSessionTickets       1
+ enableSpdy              15
+ enableQuic              1
+</code></pre>
+<p>接下来我们去一个网站测试下这些功能是否成功开启，打开 <a href="https://http3check.net/">https://http3check.net/</a>进行测试，这个网站也是LiteSpeed官方出的。显示** HTTP/3 is supported<strong>和</strong>HTTP/3 is supported**就说明大功告成了。</p>
+<figure data-type="image" tabindex="3"><img src="https://git.69cdn.com/post-images/1582796240639.png" alt="" loading="lazy"></figure>
+<p>如果提示失败，我们则一步步来确认问题出在哪里。</p>
+<p><strong>开启QUIC有<a href="https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:config:enable_quic">两个硬性要求</a>：</strong><br>
+!.必须是可信证书，自签发的不行，而且证书需要正确安装，有完整的证书链。<br>
+!.防火墙的443端口必须同时开启UDP，不能只开HTTP。</p>
+<p>我们首先确认UDP 443端口是否由OLS正常占用。<br>
+执行命令：<code>netstat -lupn | grep 443</code> 查看端口占用情况。</p>
+<pre><code class="language-bash">root@de ~ # netstat -lupn | grep 443
+udp        0      0 138.201.81.152:443      0.0.0.0:*                           29840/openlitespeed
+udp        0      0 138.201.81.152:443      0.0.0.0:*                           29840/openlitespeed
+</code></pre>
+<p>如果能看到进程，说明进程已经正确运行并占用端口，接下来确认是否在防火墙设置里面放行。<br>
+如果使用Firewalld：</p>
+<pre><code class="language-bash">firewall-cmd --zone=public --add-port=443/udp --permanent
+firewall-cmd --reload
+</code></pre>
+<p>如果使用iptables：</p>
+<pre><code class="language-bash">iptables -I INPUT -p udp --dport 443 -j ACCEPT
+/sbin/service iptables save
+/sbin/service iptables restart
+</code></pre>
+<p>关于测试UDP包是否能正常进出，<a href="https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:config:enable_quic#how_to_test_udp_incoming_and_outgoing_connections">这里有方法</a>。</p>
+<p>下一篇文章来说一说：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件。</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">
+              <h3 class="post-title">
+                OpenLiteSpeed使用CloudFlare等CDN如何显示访客的真实IP
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '6798e82a6510fadca426',
+    clientSecret: '09a52823ccaaaaade88bf38fd3cdddfe8b8dc6df',
+    repo: 'bob0627.github.io',
+    owner: 'bob0627',
+    admin: ['bob0627'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://git.69cdn.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
