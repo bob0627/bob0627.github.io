@@ -1,0 +1,227 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DirectAdmin使用OpenLiteSpeed代替Apache | Gridea</title>
+<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582780980353">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://git.69cdn.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="DirectAdmin使用OpenLiteSpeed代替Apache | Gridea - Atom Feed" href="https://git.69cdn.com/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="本文主要内容分三部分：
+1.DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache
+2.如果使用了CloudFlare等CDN后如何显示访客的真实IP
+3.使用了OpenLiteSpeed后如何开启HTTP/2 ..." />
+    <meta name="keywords" content="DirectAdmin,OpenLiteSpeed,Apache" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://git.69cdn.com">
+  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582780980353" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              DirectAdmin使用OpenLiteSpeed代替Apache
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-02-26
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://git.69cdn.com/tag/7xx8kWY3v/" class="post-tag">
+                  # DirectAdmin
+                </a>
+              
+                <a href="https://git.69cdn.com/tag/qlKzDKtWtC/" class="post-tag">
+                  # OpenLiteSpeed
+                </a>
+              
+                <a href="https://git.69cdn.com/tag/Lgwv7Disj-/" class="post-tag">
+                  # Apache
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://git.69cdn.com/post-images/directadmin-use-openlitespeed-instead-of-apache.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>本文主要内容分三部分：<br>
+1.DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache<br>
+2.如果使用了CloudFlare等CDN后如何显示访客的真实IP<br>
+3.使用了OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</p>
+<p>首先普及下<a href="https://openlitespeed.org/">OpenLiteSpeed</a>（以下简称OLS）相关知识，OLS是<a href="https://www.litespeedtech.com/">LiteSpeed Technologies Inc.</a>出品的一款开源的网页服务器，该公司出品的商业版Web服务器<a href="https://www.litespeedtech.com/products/litespeed-web-server">LiteSpeed Web Server, Enterprise edition</a>（简称LSWS）性能超强，在各种测试和实际使用中都是几乎都是地表最强的存在，以最常见的WordPress平台为例，使用LSWSE服务器并且开启他们专门针对WP开发的缓存优化插件<a href="https://www.litespeedtech.com/products/cache-plugins">LSCache for WP</a>后，每秒处理能力远超其他插件，如下图：</p>
+<p><img src="https://git.69cdn.com/post-images/1582773462010.png" alt="" loading="lazy">，</p>
+<p>并且无论是商业版还是开源版都支持很多最新的技术，比如HTTP/2 / HTTP/3 / SPDY / QUIC的支持，让网站打开飞快。</p>
+<p>但是商业版LSWSE的最大缺点<a href="https://www.litespeedtech.com/products/litespeed-web-server/lsws-pricing">就是贵</a>，我们这里不考虑商业版。好在该公司也出了一个开源版的OLS，相信很多人也安装体验过，但是OLS在使用上非常不友好，与LSWS商业版相比较而言，阉割了最重要的功能：完全兼容Apache的httpd.conf文件以及.htaccess文件。开源版与商业版的区别见<a href="https://www.litespeedtech.com/products/litespeed-web-server/editions">官方页面</a>。</p>
+<p>LSWS商业版的配置文件可以兼容Apache，而OLS的配置文件使用私有格式，这就导致了一个很严重的问题，现有流行的Web服务器操作面板如cPanel和DirectAdmin以及Plesk等都是基于Apache，一些内置的脚本也是基于Apache格式进行处理，所以我们之前还没有办法在CP或者DA上完美体验安装免费并且开源的OLS网页服务器。</p>
+<p>在DirectAdmin更新到1.57版本以后（<a href="https://help.directadmin.com/item.php?id=2095">版本推出时间大约在2019年的4月底</a>），开始支持OLS的安装，但是当时我在体验时有很多莫名其妙的bug，后来也就没继续用。这两天因为更换服务器，重新安装了DirectAdmin，优化服务器的时候发现DA官方已经很好的解决了一些兼容性问题，所以我也就尝试安装了一下开源的OLS，以下为安装OLS替换Apache的过程。</p>
+<p>要求：DA版本升级到最新版（<a href="https://help.directadmin.com/item.php?id=2095">1.57以上就支持了</a>，但是我劝你不是最新版别尝试）并且将DirectAdmin内置的<a href="https://help.directadmin.com/index.php?topic=29">Custombuild</a>也升级到<a href="https://help.directadmin.com/item.php?id=555">2.0最新版</a>，执行命令：</p>
+<pre><code class="language-javascript">cd /usr/local/directadmin
+mv custombuild custombuild_1.x
+wget -O custombuild.tar.gz http://files.directadmin.com/services/custombuild/2.0/custombuild.tar.gz
+tar xvzf custombuild.tar.gz
+cd custombuild
+./build
+</code></pre>
+<p>根据<a href="https://help.directadmin.com/item.php?id=2095">官方文档</a>的做法，在custombuild里面将webserver设置为OpenLiteSpeed，同时将php的模式改为OLS才支持的lsphp，然后开始编译OLS以及lsphp，最后重写DA的配置文件，编译过程比较久，请耐心等待。</p>
+<pre><code class="language-javascript">./build update
+./build set webserver openlitespeed
+./build set mod_ruid2 no
+./build set php1_mode lsphp
+./build openlitespeed
+./build php n
+./build rewrite_confs
+</code></pre>
+<p>基本上如果你只需要一个php版本，那你看到这里就行了。<br>
+像我安装了4个版本的php，所以我的操作如下（<a href="https://help.directadmin.com/item.php?id=2094">如何在DirectAdmin中安装多个版本的PHP</a>）：</p>
+<pre><code class="language-javascript">cd /usr/local/directadmin/custombuild
+./build update
+./build set webserver openlitespeed
+./build set mod_ruid2 no
+./build set php1_release 7.3
+./build set php2_release 7.2
+./build set php3_release 7.1
+./build set php4_release 5.6
+./build set php1_mode lsphp
+./build set php2_mode lsphp
+./build set php3_mode lsphp
+./build set php4_mode lsphp
+./build php n
+./build rewrite_confs
+</code></pre>
+<p>我这里指定了要安装的4个php的版本号，并且设定模式都是lsphp，执行完命令后，经过漫长等待，看到如下图这样的提示，这就结束了。</p>
+<figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582780222153.png" alt="" loading="lazy"></figure>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://git.69cdn.com/post/hello-world/">
+              <h3 class="post-title">
+                hello world!
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://git.69cdn.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
