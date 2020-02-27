@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>OpenLiteSpeed使用CloudFlare等CDN如何显示访客的真实IP | alect</title>
-<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582799286632">
+<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582799625250">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://git.69cdn.com/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="OpenLiteSpeed使用CloudFlare等CDN如何显示访客的真实IP | alect - Atom Feed" href="https://git.69cdn.com/atom.xml">
@@ -23,7 +23,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://git.69cdn.com">
-  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582799286632" alt="">
+  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582799625250" alt="">
   </a>
   <h1 class="site-title">
     alect
@@ -104,7 +104,7 @@
 <p>第一章：<a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache</a><br>
 第二章：<a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP</a><br>
 第三章：<a href="https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/">使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</a><br>
-第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
+第四章：<a href="https://git.69cdn.com/post/directadmin-install-litespeed-cache-plugin/">DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</a></p>
 <p>跟Apache一样，OpenLiteSpeed（以下简称OLS）也需要将CloudFlare的ip库设置在OLS的配置文件中以后，才可以获取到访客的真实IP，否则只能在日志里面看到一堆CF的IP。</p>
 <p>根据<a href="https://openlitespeed.org/kb/show-real-visitor-ip-instead-of-cloudflare-ips/">OLS官网的文章</a>，<strong>首先要开启“<a href="https://openlitespeed.org/kb/show-real-visitor-ip-instead-of-cloudflare-ips/">Use Client IP in Header</a>”功能</strong>，并且将CloudFlare的IP地址加入可信地址库后即可正确识别真实访客的IP地址，与Apache的“RemoteIPInternalProxy”功能如出一辙。如果是独立安装不使用cPanel或者DirectAdmin之类的控制面板的话，可以直接按照官方的提示进行操作即可。</p>
 <figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582789734146.png" alt="" loading="lazy"></figure>
