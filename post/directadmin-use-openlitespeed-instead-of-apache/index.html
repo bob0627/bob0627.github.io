@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache | alect</title>
-<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582790078513">
+<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582792163971">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://git.69cdn.com/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache | alect - Atom Feed" href="https://git.69cdn.com/atom.xml">
@@ -24,7 +24,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://git.69cdn.com">
-  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582790078513" alt="">
+  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582792163971" alt="">
   </a>
   <h1 class="site-title">
     alect
@@ -159,7 +159,7 @@ cd custombuild
 以下代码意思为每三分钟扫描所有用户网站根目录以及最深2层目录下的.htaccess文件是否有变动，如果变动了就重启OLS服务，你可以把 &quot;*/3&quot; 改为5或者其他间隔时间，不需要太小以免负载过大。&quot;maxdepth 2&quot;基本也就够了，查找的层数过多会有严重性能问题。</p>
 <pre><code class="language-javascript">cd /etc/cron.d/
 touch openlitespeed_htaccess_scan
-echo &quot;*/3 * * * * root if ! find /home/*/domains/*/*_html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name '.htaccess' -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi&quot;&gt; touch openlitespeed_htaccess_scan
+echo &quot;*/3 * * * * root if ! find /home/*/domains/*/*_html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name '.htaccess' -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi&quot;&gt; openlitespeed_htaccess_scan
 </code></pre>
 <p>至此，安装OpenLiteSpeed替换Apache的过程就已经结束，你现在可以开始体验了。<br>
 下一篇文章写“<a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP</a>”的问题。</p>
