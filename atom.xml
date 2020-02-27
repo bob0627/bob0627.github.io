@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://git.69cdn.com</id>
     <title>Gridea</title>
-    <updated>2020-02-27T05:23:15.559Z</updated>
+    <updated>2020-02-27T05:27:30.601Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://git.69cdn.com"/>
     <link rel="self" href="https://git.69cdn.com/atom.xml"/>
@@ -21,7 +21,7 @@
 2.如果使用了CloudFlare等CDN后如何显示访客的真实IP<br>
 3.使用了OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</p>
 <p>首先普及下<a href="https://openlitespeed.org/">OpenLiteSpeed</a>（以下简称OLS）相关知识，OLS是<a href="https://www.litespeedtech.com/">LiteSpeed Technologies Inc.</a>出品的一款开源的网页服务器，该公司出品的商业版Web服务器<a href="https://www.litespeedtech.com/products/litespeed-web-server">LiteSpeed Web Server, Enterprise edition</a>（简称LSWS）性能超强，在各种测试和实际使用中都是几乎都是地表最强的存在，以最常见的WordPress平台为例，使用LSWSE服务器并且开启他们专门针对WP开发的缓存优化插件<a href="https://www.litespeedtech.com/products/cache-plugins">LSCache for WP</a>后，每秒处理能力远超其他插件，如下图：</p>
-<p><img src="https://git.69cdn.com/post-images/1582773462010.png" alt="" loading="lazy">，</p>
+<figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582781196235.png" alt="" loading="lazy"></figure>
 <p>并且无论是商业版还是开源版都支持很多最新的技术，比如HTTP/2 / HTTP/3 / SPDY / QUIC的支持，让网站打开飞快。</p>
 <p>但是商业版LSWSE的最大缺点<a href="https://www.litespeedtech.com/products/litespeed-web-server/lsws-pricing">就是贵</a>，我们这里不考虑商业版。好在该公司也出了一个开源版的OLS，相信很多人也安装体验过，但是OLS在使用上非常不友好，与LSWS商业版相比较而言，阉割了最重要的功能：完全兼容Apache的httpd.conf文件以及.htaccess文件。开源版与商业版的区别见<a href="https://www.litespeedtech.com/products/litespeed-web-server/editions">官方页面</a>。</p>
 <p>LSWS商业版的配置文件可以兼容Apache，而OLS的配置文件使用私有格式，这就导致了一个很严重的问题，现有流行的Web服务器操作面板如cPanel和DirectAdmin以及Plesk等都是基于Apache，一些内置的脚本也是基于Apache格式进行处理，所以我们之前还没有办法在CP或者DA上完美体验安装免费并且开源的OLS网页服务器。</p>
@@ -61,7 +61,7 @@ cd custombuild
 ./build rewrite_confs
 </code></pre>
 <p>我这里指定了要安装的4个php的版本号，并且设定模式都是lsphp，执行完命令后，经过漫长等待，看到如下图这样的提示，这就结束了。</p>
-<figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582780222153.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://git.69cdn.com/post-images/1582780222153.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
