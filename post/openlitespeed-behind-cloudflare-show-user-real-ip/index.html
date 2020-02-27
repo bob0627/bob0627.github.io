@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>OpenLiteSpeed使用CloudFlare等CDN如何显示访客的真实IP | alect</title>
-<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582789787707">
+<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582790017383">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://git.69cdn.com/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="OpenLiteSpeed使用CloudFlare等CDN如何显示访客的真实IP | alect - Atom Feed" href="https://git.69cdn.com/atom.xml">
@@ -23,7 +23,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://git.69cdn.com">
-  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582789787707" alt="">
+  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582790017383" alt="">
   </a>
   <h1 class="site-title">
     alect
@@ -120,6 +120,7 @@ echo &quot;useIpInProxyHeader 2&quot;&gt; httpd-defaults.conf
 </code></pre>
 <figure data-type="image" tabindex="3"><img src="https://git.69cdn.com/post-images/1582789748492.png" alt="" loading="lazy"></figure>
 <p>如果你有其他的前端或者LB之类的，也一样要把IP地址加进去，并且最后一定要加上一个大写的T，改好后在OpenLiteSpeed后台刷新即可见到已经成功将CF的IP加载到了OLS配置文件中，从此即可正常显示访客的真实IP。</p>
+<p>下一章内容写：使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持。</p>
 
               </div>
               <div class="toc-container">
