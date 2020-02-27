@@ -1,0 +1,222 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OpenLiteSpeed使用CloudFlare等CDN如何显示访客的真实IP | alect</title>
+<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582789787707">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://git.69cdn.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="OpenLiteSpeed使用CloudFlare等CDN如何显示访客的真实IP | alect - Atom Feed" href="https://git.69cdn.com/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="本文为DirectAdmin面板如何使用OpenLiteSpeed系列的第二章：
+第一章：DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache
+第二章：如果OpenLiteSpeed使用了CloudFlare等..." />
+    <meta name="keywords" content="DirectAdmin,OpenLiteSpeed" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://git.69cdn.com">
+  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582789787707" alt="">
+  </a>
+  <h1 class="site-title">
+    alect
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              OpenLiteSpeed使用CloudFlare等CDN如何显示访客的真实IP
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-02-27
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://git.69cdn.com/tag/7xx8kWY3v/" class="post-tag">
+                  # DirectAdmin
+                </a>
+              
+                <a href="https://git.69cdn.com/tag/qlKzDKtWtC/" class="post-tag">
+                  # OpenLiteSpeed
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://git.69cdn.com/post-images/openlitespeed-behind-cloudflare-show-user-real-ip.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>本文为DirectAdmin面板如何使用OpenLiteSpeed系列的第二章：</p>
+<p>第一章：<a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache</a><br>
+第二章：如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP<br>
+第三章：使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持<br>
+第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
+<p>跟Apache一样，OpenLiteSpeed（以下简称OLS）也需要将CloudFlare的ip库设置在OLS的配置文件中以后，才可以获取到访客的真实IP，否则只能在日志里面看到一堆CF的IP。</p>
+<p>根据<a href="https://openlitespeed.org/kb/show-real-visitor-ip-instead-of-cloudflare-ips/">OLS官网的文章</a>，<strong>首先要开启“<a href="https://openlitespeed.org/kb/show-real-visitor-ip-instead-of-cloudflare-ips/">Use Client IP in Header</a>”功能</strong>，并且将CloudFlare的IP地址加入可信地址库后即可正确识别真实访客的IP地址，与Apache的“RemoteIPInternalProxy”功能如出一辙。如果是独立安装不使用cPanel或者DirectAdmin之类的控制面板的话，可以直接按照官方的提示进行操作即可。</p>
+<figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582789734146.png" alt="" loading="lazy"></figure>
+<p>DirectAdmin面板在使用OLS时引入了外部配置文件，<a href="https://forum.directadmin.com/threads/da-openlitespeed-configuration-is-readonly.58254/">导致OLS的后台会直接提示你“只读模式”</a>，只能去修改配置文件了。用了DA面板后的配置文件跟原始OLS的配置文件并不相同，多次尝试后，应该修改OLS程序安装目录下/usr/local/lsws/conf/httpd-defaults.conf文件，在最后加上'useIpInProxyHeader        2'这段内容，如下图：</p>
+<figure data-type="image" tabindex="2"><img src="https://git.69cdn.com/post-images/1582788909921.png" alt="" loading="lazy"></figure>
+<pre><code class="language-javascript">cd /usr/local/lsws/conf
+echo &quot;useIpInProxyHeader 2&quot;&gt; httpd-defaults.conf
+</code></pre>
+<p>第二部操作就是<a href="https://www.cloudflare.com/ips/">获取CloudFlare的IP地址库内容</a>，并按照OLS的格式加进配置文件，找到OLS程序安装目录下/usr/local/lsws/conf/httpd-accesscontrol.conf配置文件，清空原有内容，用我这个替换掉。</p>
+<pre><code class="language-javascript">accessControl  {
+  allow                   ALL, 103.21.244.0/22T, 103.22.200.0/22T, 103.31.4.0/22T, 104.16.0.0/12T, 108.162.192.0/18T, 131.0.72.0/22T, 141.101.64.0/18T, 162.158.0.0/15T, 172.64.0.0/13T, 173.245.48.0/20T, 188.114.96.0/20T, 190.93.240.0/20T, 197.234.240.0/22T, 198.41.128.0/17T, 199.27.128.0/21T
+}
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://git.69cdn.com/post-images/1582789748492.png" alt="" loading="lazy"></figure>
+<p>如果你有其他的前端或者LB之类的，也一样要把IP地址加进去，并且最后一定要加上一个大写的T，改好后在OpenLiteSpeed后台刷新即可见到已经成功将CF的IP加载到了OLS配置文件中，从此即可正常显示访客的真实IP。</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">
+              <h3 class="post-title">
+                DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '6798e82a6510fadca426',
+    clientSecret: '09a52823ccaaaaade88bf38fd3cdddfe8b8dc6df',
+    repo: 'bob0627.github.io',
+    owner: 'bob0627',
+    admin: ['bob0627'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://git.69cdn.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
