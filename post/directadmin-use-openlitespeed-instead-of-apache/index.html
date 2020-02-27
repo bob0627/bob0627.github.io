@@ -2,19 +2,19 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>DirectAdmin使用OpenLiteSpeed代替Apache | Gridea</title>
-<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582781209837">
+<title>DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache | Gridea</title>
+<link rel="shortcut icon" href="https://git.69cdn.com/favicon.ico?v=1582784405640">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://git.69cdn.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="DirectAdmin使用OpenLiteSpeed代替Apache | Gridea - Atom Feed" href="https://git.69cdn.com/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache | Gridea - Atom Feed" href="https://git.69cdn.com/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="本文主要内容分三部分：
-1.DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache
-2.如果使用了CloudFlare等CDN后如何显示访客的真实IP
-3.使用了OpenLiteSpeed后如何开启HTTP/2 ..." />
+    <meta name="description" content="预计将写成一个系列文章，本文为此系列的第一章：
+第一章：DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache
+第二章：如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP
+第三..." />
     <meta name="keywords" content="DirectAdmin,OpenLiteSpeed,Apache" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -24,7 +24,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://git.69cdn.com">
-  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582781209837" alt="">
+  <img class="avatar" src="https://git.69cdn.com/images/avatar.png?v=1582784405640" alt="">
   </a>
   <h1 class="site-title">
     Gridea
@@ -77,14 +77,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              DirectAdmin使用OpenLiteSpeed代替Apache
+              DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache
             </h2>
             <div class="post-info">
               <span>
                 2020-02-26
               </span>
               <span>
-                4 min read
+                6 min read
               </span>
               
                 <a href="https://git.69cdn.com/tag/7xx8kWY3v/" class="post-tag">
@@ -105,17 +105,19 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>本文主要内容分三部分：<br>
-1.DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache<br>
-2.如果使用了CloudFlare等CDN后如何显示访客的真实IP<br>
-3.使用了OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</p>
-<p>首先普及下<a href="https://openlitespeed.org/">OpenLiteSpeed</a>（以下简称OLS）相关知识，OLS是<a href="https://www.litespeedtech.com/">LiteSpeed Technologies Inc.</a>出品的一款开源的网页服务器，该公司出品的商业版Web服务器<a href="https://www.litespeedtech.com/products/litespeed-web-server">LiteSpeed Web Server, Enterprise edition</a>（简称LSWS）性能超强，在各种测试和实际使用中都是几乎都是地表最强的存在，以最常见的WordPress平台为例，使用LSWSE服务器并且开启他们专门针对WP开发的缓存优化插件<a href="https://www.litespeedtech.com/products/cache-plugins">LSCache for WP</a>后，每秒处理能力远超其他插件，如下图：</p>
-<figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582781196235.png" alt="" loading="lazy"></figure>
+                <p>预计将写成一个系列文章，本文为此系列的第一章：<br>
+第一章：DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache<br>
+第二章：如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP<br>
+第三章：使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持<br>
+第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
+<p>首先普及下<a href="https://openlitespeed.org/">OpenLiteSpeed</a>（以下简称OLS）相关知识，OLS是<a href="https://www.litespeedtech.com/">LiteSpeed Technologies Inc.</a>出品的一款开源的网页服务器，该公司出品的商业版Web服务器<a href="https://www.litespeedtech.com/products/litespeed-web-server">LiteSpeed Web Server, Enterprise edition</a>（简称LSWS）性能超强，在各种测试和实际使用中都是几乎都是地表最强的存在，以最常见的WordPress平台为例，使用LSWS服务器并且开启他们专门针对WP开发的缓存优化插件<a href="https://www.litespeedtech.com/products/cache-plugins">LSCache for WP</a>后，<a href="https://www.litespeedtech.com/benchmarks/wordpress">每秒处理能力远超其他插件</a>，如下图：</p>
+<figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582781686331.png" alt="" loading="lazy"></figure>
 <p>并且无论是商业版还是开源版都支持很多最新的技术，比如HTTP/2 / HTTP/3 / SPDY / QUIC的支持，让网站打开飞快。</p>
-<p>但是商业版LSWSE的最大缺点<a href="https://www.litespeedtech.com/products/litespeed-web-server/lsws-pricing">就是贵</a>，我们这里不考虑商业版。好在该公司也出了一个开源版的OLS，相信很多人也安装体验过，但是OLS在使用上非常不友好，与LSWS商业版相比较而言，阉割了最重要的功能：完全兼容Apache的httpd.conf文件以及.htaccess文件。开源版与商业版的区别见<a href="https://www.litespeedtech.com/products/litespeed-web-server/editions">官方页面</a>。</p>
+<p>但是商业版LSWS的最大缺点<a href="https://www.litespeedtech.com/products/litespeed-web-server/lsws-pricing">就是贵🙁</a>，我们这里不考虑商业版。好在该公司也出了一个开源版的OLS，相信很多人也安装体验过，但是OLS在使用上非常不友好，与LSWS商业版相比较而言，阉割了最重要的功能：完全兼容Apache的httpd.conf文件以及.htaccess文件。开源版与商业版的区别见<a href="https://www.litespeedtech.com/products/litespeed-web-server/editions">官方页面</a>，如下图红圈位置OLS缺少了两个DirectAdmin最需要的功能。</p>
+<figure data-type="image" tabindex="2"><img src="https://git.69cdn.com/post-images/1582781965857.png" alt="" loading="lazy"></figure>
 <p>LSWS商业版的配置文件可以兼容Apache，而OLS的配置文件使用私有格式，这就导致了一个很严重的问题，现有流行的Web服务器操作面板如cPanel和DirectAdmin以及Plesk等都是基于Apache，一些内置的脚本也是基于Apache格式进行处理，所以我们之前还没有办法在CP或者DA上完美体验安装免费并且开源的OLS网页服务器。</p>
-<p>在DirectAdmin更新到1.57版本以后（<a href="https://help.directadmin.com/item.php?id=2095">版本推出时间大约在2019年的4月底</a>），开始支持OLS的安装，但是当时我在体验时有很多莫名其妙的bug，后来也就没继续用。这两天因为更换服务器，重新安装了DirectAdmin，优化服务器的时候发现DA官方已经很好的解决了一些兼容性问题，所以我也就尝试安装了一下开源的OLS，以下为安装OLS替换Apache的过程。</p>
-<p>要求：DA版本升级到最新版（<a href="https://help.directadmin.com/item.php?id=2095">1.57以上就支持了</a>，但是我劝你不是最新版别尝试）并且将DirectAdmin内置的<a href="https://help.directadmin.com/index.php?topic=29">Custombuild</a>也升级到<a href="https://help.directadmin.com/item.php?id=555">2.0最新版</a>，执行命令：</p>
+<p>在DirectAdmin更新到1.57版本以后（<a href="https://help.directadmin.com/item.php?id=2095">版本推出时间大约在2019年的4月底</a>），开始支持OLS的安装，但是当时我在体验时有很多莫名其妙的bug，后来也就没继续用。这两天因为更换服务器，重新安装了DirectAdmin，优化服务器的时候发现DA官方通过努力，已经很好的解决了上面提到的兼容性问题，所以我也就尝试安装了一下开源的OLS，以下为安装OLS替换Apache的过程。</p>
+<p>要求：<strong>DA一定升级到最新版</strong>（<a href="https://help.directadmin.com/item.php?id=2095">1.57以上就支持了</a>，但是我劝你不是最新版别尝试）并且将DirectAdmin内置的<a href="https://help.directadmin.com/index.php?topic=29">Custombuild</a>也升级到<a href="https://help.directadmin.com/item.php?id=555">2.0最新版</a>，执行命令：</p>
 <pre><code class="language-javascript">cd /usr/local/directadmin
 mv custombuild custombuild_1.x
 wget -O custombuild.tar.gz http://files.directadmin.com/services/custombuild/2.0/custombuild.tar.gz
@@ -123,7 +125,7 @@ tar xvzf custombuild.tar.gz
 cd custombuild
 ./build
 </code></pre>
-<p>根据<a href="https://help.directadmin.com/item.php?id=2095">官方文档</a>的做法，在custombuild里面将webserver设置为OpenLiteSpeed，同时将php的模式改为OLS才支持的lsphp，然后开始编译OLS以及lsphp，最后重写DA的配置文件，编译过程比较久，请耐心等待。</p>
+<p>根据<a href="https://help.directadmin.com/item.php?id=2095">官方文档</a>的做法，在custombuild里面将webserver设置为OpenLiteSpeed，<strong>同时将php的模式改为OLS才支持的lsphp</strong>，然后开始编译OLS以及lsphp，最后重写DA的配置文件，编译过程比较久，请耐心等待。</p>
 <pre><code class="language-javascript">./build update
 ./build set webserver openlitespeed
 ./build set mod_ruid2 no
@@ -149,8 +151,17 @@ cd custombuild
 ./build php n
 ./build rewrite_confs
 </code></pre>
-<p>我这里指定了要安装的4个php的版本号，并且设定模式都是lsphp，执行完命令后，经过漫长等待，看到如下图这样的提示，这就结束了。</p>
-<figure data-type="image" tabindex="2"><img src="https://git.69cdn.com/post-images/1582780222153.png" alt="" loading="lazy"></figure>
+<p>我这里指定了要安装的4个php的版本号，并且设定模式都是lsphp，执行完命令后，经过漫长等待，看到如下图这样的提示，安装结束了。</p>
+<figure data-type="image" tabindex="3"><img src="https://git.69cdn.com/post-images/1582780222153.png" alt="" loading="lazy"></figure>
+<p>剩下的一步也是最重要的一步，因为开源版的OLS为了跟商业版做出区别，<strong>十分恶心的限制了实时读取.htaccess文件的功能，仅仅在OLS启动的时候读取一次.htaccess</strong>，逼着大家用商业版。接下来这一步操作就是让系统定时扫描所有用户网站根目录下的.htaccess文件，如果发现有变动就自动重启OLS，以此来规避限制。</p>
+<p>我们利用系统的cronjob功能在系统新增一个定时任务，进入/etc/cron.d/目录，新建文件名字为openlitespeed_htaccess_scan，把下面的代码写入文件即可。<br>
+以下代码意思为每三分钟扫描所有用户网站根目录以及最深2层目录下的.htaccess文件是否有变动，如果变动了就重启OLS服务，你可以把 &quot;*/3&quot; 改为5或者其他间隔时间，不需要太小以免负载过大。&quot;maxdepth 2&quot;基本也就够了，查找的层数过多会有严重性能问题。</p>
+<pre><code class="language-javascript">cd /etc/cron.d/
+touch openlitespeed_htaccess_scan
+echo &quot;*/3 * * * * root if ! find /home/*/domains/*/*_html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name '.htaccess' -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi&quot;&gt; touch openlitespeed_htaccess_scan
+</code></pre>
+<p>至此，安装OpenLiteSpeed替换Apache的过程就已经结束，你现在可以开始体验了。<br>
+下一篇文章写“如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP”的问题。</p>
 
               </div>
               <div class="toc-container">
@@ -171,6 +182,32 @@ cd custombuild
           </div>
         
 
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '6798e82a6510fadca426',
+    clientSecret: '09a52823ccaaaaade88bf38fd3cdddfe8b8dc6df',
+    repo: 'bob0627.github.io',
+    owner: 'bob0627',
+    admin: ['bob0627'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
         
 
         <div class="site-footer">
