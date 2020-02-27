@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://git.69cdn.com</id>
     <title>alect</title>
-    <updated>2020-02-27T10:24:16.443Z</updated>
+    <updated>2020-02-27T10:28:09.432Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://git.69cdn.com"/>
     <link rel="self" href="https://git.69cdn.com/atom.xml"/>
@@ -11,15 +11,38 @@
     <icon>https://git.69cdn.com/favicon.ico</icon>
     <rights>All rights reserved 2020, alect</rights>
     <entry>
+        <title type="html"><![CDATA[DirectAdmin后台安装[LiteSpeed控制插件]]]></title>
+        <id>https://git.69cdn.com/post/directadmin-hou-tai-an-zhuang-litespeed-kong-zhi-cha-jian/</id>
+        <link href="https://git.69cdn.com/post/directadmin-hou-tai-an-zhuang-litespeed-kong-zhi-cha-jian/">
+        </link>
+        <updated>2020-02-27T10:27:38.000Z</updated>
+        <content type="html"><![CDATA[<p>本文为DirectAdmin面板如何使用OpenLiteSpeed系列的第四章：<br>
+第一章：<a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache</a><br>
+第二章：<a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP</a><br>
+第三章：<a href="https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/">使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</a><br>
+第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[OpenLiteSpeed开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持]]></title>
         <id>https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/</id>
         <link href="https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/">
         </link>
         <updated>2020-02-27T08:59:58.000Z</updated>
-        <summary type="html"><![CDATA[<p>开源版的OpenLiteSpeed（OLS）与商业版一样，现在已经完全支持现有的HTTP/ <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">HTTP/2</a> / <a href="https://www.litespeedtech.com/http3-solutions">HTTP/3</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">SPDY</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/quic-support">QUIC</a>协议，这些新协议给大家带来的好处就是打开网页速度越来越快，许多网页都能秒开。</p>
+        <summary type="html"><![CDATA[<p>本文为DirectAdmin面板如何使用OpenLiteSpeed系列的第三章：<br>
+第一章：<a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache</a><br>
+第二章：<a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP</a><br>
+第三章：<a href="https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/">使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</a><br>
+第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
+<p>开源版的OpenLiteSpeed（OLS）与商业版一样，现在已经完全支持现有的HTTP/ <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">HTTP/2</a> / <a href="https://www.litespeedtech.com/http3-solutions">HTTP/3</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">SPDY</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/quic-support">QUIC</a>协议，这些新协议给大家带来的好处就是打开网页速度越来越快，许多网页都能秒开。</p>
 <p>使用单独安装的OpenLiteSpeed的时候，我们可以通过OLS的web admin管理页面通过选项方便开启这些协议的支持，后台选择Listeners，选择相应IP的SSL选项，按照页面提示开启即可。</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>开源版的OpenLiteSpeed（OLS）与商业版一样，现在已经完全支持现有的HTTP/ <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">HTTP/2</a> / <a href="https://www.litespeedtech.com/http3-solutions">HTTP/3</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">SPDY</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/quic-support">QUIC</a>协议，这些新协议给大家带来的好处就是打开网页速度越来越快，许多网页都能秒开。</p>
+        <content type="html"><![CDATA[<p>本文为DirectAdmin面板如何使用OpenLiteSpeed系列的第三章：<br>
+第一章：<a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache</a><br>
+第二章：<a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP</a><br>
+第三章：<a href="https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/">使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</a><br>
+第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
+<p>开源版的OpenLiteSpeed（OLS）与商业版一样，现在已经完全支持现有的HTTP/ <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">HTTP/2</a> / <a href="https://www.litespeedtech.com/http3-solutions">HTTP/3</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/http-2-support">SPDY</a> / <a href="https://www.litespeedtech.com/products/litespeed-web-server/features/quic-support">QUIC</a>协议，这些新协议给大家带来的好处就是打开网页速度越来越快，许多网页都能秒开。</p>
 <p>使用单独安装的OpenLiteSpeed的时候，我们可以通过OLS的web admin管理页面通过选项方便开启这些协议的支持，后台选择Listeners，选择相应IP的SSL选项，按照页面提示开启即可。</p>
 <!-- more -->
 <figure data-type="image" tabindex="1"><img src="https://git.69cdn.com/post-images/1582795243413.png" alt="" loading="lazy"></figure>
@@ -66,8 +89,8 @@ firewall-cmd --reload
         <updated>2020-02-27T07:09:26.000Z</updated>
         <content type="html"><![CDATA[<p>本文为DirectAdmin面板如何使用OpenLiteSpeed系列的第二章：</p>
 <p>第一章：<a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache</a><br>
-第二章：如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP<br>
-第三章：使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持<br>
+第二章：<a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP</a><br>
+第三章：<a href="https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/">使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</a><br>
 第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
 <p>跟Apache一样，OpenLiteSpeed（以下简称OLS）也需要将CloudFlare的ip库设置在OLS的配置文件中以后，才可以获取到访客的真实IP，否则只能在日志里面看到一堆CF的IP。</p>
 <p>根据<a href="https://openlitespeed.org/kb/show-real-visitor-ip-instead-of-cloudflare-ips/">OLS官网的文章</a>，<strong>首先要开启“<a href="https://openlitespeed.org/kb/show-real-visitor-ip-instead-of-cloudflare-ips/">Use Client IP in Header</a>”功能</strong>，并且将CloudFlare的IP地址加入可信地址库后即可正确识别真实访客的IP地址，与Apache的“RemoteIPInternalProxy”功能如出一辙。如果是独立安装不使用cPanel或者DirectAdmin之类的控制面板的话，可以直接按照官方的提示进行操作即可。</p>
@@ -94,15 +117,15 @@ echo &quot;useIpInProxyHeader 2&quot;&gt; httpd-defaults.conf
         </link>
         <updated>2020-02-26T10:09:15.000Z</updated>
         <summary type="html"><![CDATA[<p>预计将写成一个系列文章，本文为此系列的第一章：<br>
-第一章：DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache<br>
+第一章：<a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache</a><br>
 第二章：<a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP</a><br>
-第三章：使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持<br>
+第三章：<a href="https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/">使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</a><br>
 第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>预计将写成一个系列文章，本文为此系列的第一章：<br>
-第一章：DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache<br>
+第一章：<a href="https://git.69cdn.com/post/directadmin-use-openlitespeed-instead-of-apache/">DirectAdmin面板如何使用OpenLiteSpeed替代默认的Apache</a><br>
 第二章：<a href="https://git.69cdn.com/post/openlitespeed-behind-cloudflare-show-user-real-ip/">如果OpenLiteSpeed使用了CloudFlare等CDN如何显示访客的真实IP</a><br>
-第三章：使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持<br>
+第三章：<a href="https://git.69cdn.com/post/openlitespeed-use-http2-http3-spdy-quic/">使用OpenLiteSpeed后如何开启HTTP/2 / HTTP/3 / SPDY / QUIC的支持</a><br>
 第四章：DirectAdmin后台安装[LiteSpeed控制插件]一键安装缓存插件</p>
 <!-- more -->
 <p>首先普及下<a href="https://openlitespeed.org/">OpenLiteSpeed</a>（以下简称OLS）相关知识，OLS是<a href="https://www.litespeedtech.com/">LiteSpeed Technologies Inc.</a>出品的一款开源的网页服务器，该公司出品的商业版Web服务器<a href="https://www.litespeedtech.com/products/litespeed-web-server">LiteSpeed Web Server, Enterprise edition</a>（简称LSWS）性能超强，在各种测试和实际使用中都是几乎都是地表最强的存在，以最常见的WordPress平台为例，使用LSWS服务器并且开启他们专门针对WP开发的缓存优化插件<a href="https://www.litespeedtech.com/products/cache-plugins">LSCache for WP</a>后，<a href="https://www.litespeedtech.com/benchmarks/wordpress">每秒处理能力远超其他插件</a>，如下图：</p>
