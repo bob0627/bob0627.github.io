@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://git.69cdn.com</id>
     <title>alect</title>
-    <updated>2020-02-27T10:33:52.320Z</updated>
+    <updated>2020-02-29T09:23:09.170Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://git.69cdn.com"/>
     <link rel="self" href="https://git.69cdn.com/atom.xml"/>
@@ -10,6 +10,16 @@
     <logo>https://git.69cdn.com/images/avatar.png</logo>
     <icon>https://git.69cdn.com/favicon.ico</icon>
     <rights>All rights reserved 2020, alect</rights>
+    <entry>
+        <title type="html"><![CDATA[OpenLiteSpeed安装定制版的LiteSpeed Memcached]]></title>
+        <id>https://git.69cdn.com/post/openlitespeed-an-zhuang-ding-zhi-ban-de-litespeed-memcached/</id>
+        <link href="https://git.69cdn.com/post/openlitespeed-an-zhuang-ding-zhi-ban-de-litespeed-memcached/">
+        </link>
+        <updated>2020-02-27T13:50:19.000Z</updated>
+        <content type="html"><![CDATA[<p>https://www.litespeedtech.com/open-source/litespeed-memcached</p>
+<p>LSMCD ，OLS官方出品的定制版Memcached，完美的替代品。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[DirectAdmin后台安装[LiteSpeed控制插件]]]></title>
         <id>https://git.69cdn.com/post/directadmin-install-litespeed-cache-plugin/</id>
@@ -166,6 +176,7 @@ cd custombuild
 ./build set php2_mode lsphp
 ./build set php3_mode lsphp
 ./build set php4_mode lsphp
+./build openlitespeed
 ./build php n
 ./build rewrite_confs
 </code></pre>
